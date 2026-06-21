@@ -1,0 +1,41 @@
+project_name: TAGE-Depth
+seed: 6248
+
+data:
+  root: data/TransCG
+  train_split: train.txt
+  val_split: val.txt
+  test_split: test.txt
+  image_size: [240, 320]
+  depth_scale: 1.0
+
+model:
+  in_channels_rgb: 3
+  base_channels: 48
+  num_scales: 4
+  prior_channels: 3
+  max_depth: 10.0
+
+training:
+  epochs: 3
+  batch_size: 2
+  num_workers: 0
+  lr_adapter: 2.0e-5
+  lr_head: 5.0e-6
+  weight_decay: 1.0e-4
+  grad_clip: 5.0
+  amp: true
+
+loss:
+  lambda_mask: 1.70
+  lambda_rmse: 0.92
+  lambda_hard: 0.65
+  lambda_boundary: 0.95
+  lambda_grad: 0.52
+  lambda_bg: 0.05
+  lambda_stab: 1.00
+  lambda_pres: 1.00
+
+output:
+  out_dir: outputs/tage_depth
+  save_every: 1
